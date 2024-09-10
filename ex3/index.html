@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microblogging App</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="post-section">
-        <h2>Create a Post</h2>
-        <textarea id="post-content" placeholder="What's on your mind?"></textarea><br>
-        <button onclick="createPost()">Post</button>
+    <div class="container">
+        <h1>Microblogging App</h1>
+        <form id="postForm">
+            <textarea id="postContent" placeholder="What's on your mind?" required></textarea>
+            <button type="submit">Post</button>
+        </form>
+        <div id="posts">
+            <!-- Posts will be dynamically inserted here -->
+        </div>
     </div>
-
-    <div id="feed-section">
-        <h2>Your Feed</h2>
-        <div id="feed"></div>
-    </div>
-
     <script src="app.js"></script>
 </body>
 </html>
