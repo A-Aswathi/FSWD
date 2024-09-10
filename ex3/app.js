@@ -1,39 +1,39 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const postForm = document.getElementById('postForm');
-    const postContent = document.getElementById('postContent');
-    const postsDiv = document.getElementById('posts');
+document.addEventListener('DOMContentLoaded', loadFeed);
 
-    postForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const content = postContent.value;
-
-        // Send the post to the server
-        await fetch('/posts', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ content })
-        });
-
-        postContent.value = '';
-        loadPosts();
-    });
-
-    async function loadPosts() {
-        const response = await fetch('/posts');
-        const posts = await response.json();
-
-        postsDiv.innerHTML = '';
-        posts.forEach(post => {
-            const postDiv = document.createElement('div');
-            postDiv.classList.add('post');
-            postDiv.textContent = post.content;
-            postsDiv.appendChild(postDiv);
-        });
+function createPost() {
+    const content = document.getElementById('post-content').value;
+    if (content.trim() === '') {
+        alert("Post cannot be empty!");
+        return;
     }
 
-    loadPosts();  // Initial load
-});
+    const post = {
+        content: content,
+        timestamp: new Date().toLocaleString()
+    };
+
+    // Save the post in localStorage
+    let posts = JSON.parse(localStorage.getItem('posts')) || [];
+    posts.push(post);
+    localStorage.setItem('posts', JSON.stringify(posts));
+
+    // Clear the textarea
+    document.getElementById('post-content').value = '';
+
+    // Reload the feed
+    loadFeed();
+}
+
+function loadFeed() {
+    const feed = document.getElementById('feed');
+    feed.innerHTML = '';
+
+    const posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+    posts.forEach(post => {
+        const postDiv = document.createElement('div');
+        postDiv.textContent = ${post.content} (Posted on ${post.timestamp});
+        feed.appendChild(postDiv);
+    });
+}
 
