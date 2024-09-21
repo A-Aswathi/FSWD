@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery</title>
+    <title>Food Delivery App</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,18 +27,13 @@
 
         <section id="restaurants">
             <h2>Available Restaurants</h2>
-            <div class="restaurant" onclick="viewMenu('Pizza Place')">
-                <h3>Pizza Place</h3>
-                <p>Italian Cuisine</p>
-            </div>
-            <div class="restaurant" onclick="viewMenu('Burger Joint')">
-                <h3>Burger Joint</h3>
-                <p>American Cuisine</p>
-            </div>
-            <div class="restaurant" onclick="viewMenu('Sushi Spot')">
-                <h3>Sushi Spot</h3>
-                <p>Japanese Cuisine</p>
-            </div>
+            <div id="restaurantList"></div>
+        </section>
+
+        <section id="cartSection">
+            <h2>Your Cart</h2>
+            <ul id="cart"></ul>
+            <p id="total"></p>
         </section>
 
         <section id="about">
@@ -59,4 +54,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
