@@ -1,46 +1,34 @@
-let cart = {};
-let totalPrice = 0;
+// Sample menus for each restaurant
+const menus = {
+    "Pizza Place": [
+        { name: "Margherita Pizza", price: 10 },
+        { name: "Pepperoni Pizza", price: 12 },
+        { name: "BBQ Chicken Pizza", price: 14 }
+    ],
+    "Burger Joint": [
+        { name: "Cheeseburger", price: 8 },
+        { name: "Veggie Burger", price: 7 },
+        { name: "Double Burger", price: 10 }
+    ],
+    "Sushi Spot": [
+        { name: "California Roll", price: 8 },
+        { name: "Tuna Sashimi", price: 12 },
+        { name: "Tempura Roll", price: 10 }
+    ]
+};
 
-function addToCart(dishName, price) {
-    if (cart[dishName]) {
-        cart[dishName].quantity++;
+// Function to display the menu for the selected restaurant
+function viewMenu(restaurant) {
+    const menu = menus[restaurant];
+    if (menu) {
+        let menuList = `<h2>${restaurant} Menu</h2><ul>`;
+        menu.forEach(item => {
+            menuList += `<li>${item.name} - $${item.price}</li>`;
+        });
+        menuList += '</ul>';
+        alert(menuList);
     } else {
-        cart[dishName] = { price, quantity: 1 };
-    }
-    updateCart();
-}
-
-function updateCart() {
-    const cartItems = document.getElementById('cartItems');
-    cartItems.innerHTML = '';
-    totalPrice = 0;
-
-    for (let dishName in cart) {
-        const item = cart[dishName];
-        const li = document.createElement('li');
-        li.textContent = ${dishName} - ${item.quantity} x $${item.price};
-        cartItems.appendChild(li);
-        totalPrice += item.price * item.quantity;
-    }
-
-    document.getElementById('totalPrice').textContent = totalPrice;
-}
-
-function checkout() {
-    if (Object.keys(cart).length > 0) {
-        // Hide the cart and show order confirmation
-        document.getElementById('cart').style.display = 'none';
-        document.getElementById('orderConfirmation').style.display = 'block';
-    } else {
-        alert('Your cart is empty!');
+        alert('Menu not found.');
     }
 }
 
-function confirmOrder() {
-    alert('Your order has been confirmed!');
-    // Reset the cart and go back to initial state
-    cart = {};
-    updateCart();
-    document.getElementById('cart').style.display = 'block';
-    document.getElementById('orderConfirmation').style.display = 'none';
-}
