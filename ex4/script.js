@@ -17,18 +17,56 @@ const menus = {
     ]
 };
 
+// Cart array to hold selected items
+let cart = [];
+
 // Function to display the menu for the selected restaurant
 function viewMenu(restaurant) {
     const menu = menus[restaurant];
     if (menu) {
         let menuList = `<h2>${restaurant} Menu</h2><ul>`;
         menu.forEach(item => {
-            menuList += `<li>${item.name} - $${item.price}</li>`;
+            menuList += `<li>${item.name} - $${item.price} 
+                <button onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
+            </li>`;
         });
         menuList += '</ul>';
-        alert(menuList);
+        document.getElementById('menuDisplay').innerHTML = menuList;
     } else {
         alert('Menu not found.');
     }
 }
 
+// Function to add items to the cart
+function addToCart(itemName, itemPrice) {
+    const item = { name: itemName, price: itemPrice };
+    cart.push(item);
+    updateCartDisplay();
+}
+
+// Function to remove items from the cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartDisplay();
+}
+
+// Function to update cart display
+function updateCartDisplay() {
+    const cartList = document.getElementById('cart');
+    cartList.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartList.innerHTML = '<p>Your cart is empty.</p>';
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        cartList.innerHTML += `
+            <li>${item.name} - $${item.price} 
+                <button onclick="removeFromCart(${index})">Remove</button>
+            </li>`;
+    });
+
+    const total = cart.reduce((sum, item) => sum + item.price, 0);
+    cartList.innerHTML += `<p>Total: $${total}</p>`;
+}
