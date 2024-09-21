@@ -3,55 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery App</title>
+    <title>Food Delivery</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Food Delivery App</h1>
+        <h1>Food Delivery Service</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#restaurants">Restaurants</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
-        <section id="menu">
-            <div class="dish">
-                <img src="burger.jpg" alt="Burger">
-                <h2>Burger</h2>
-                <p>$10</p>
-                <p>Delicious beef burger with fresh lettuce and tomatoes.</p>
-                <button onclick="addToCart('Burger', 10)">Add to Cart</button>
-            </div>
+        <section id="home">
+            <h2>Welcome to Our Food Delivery Service</h2>
+            <p>Get your favorite food delivered to your doorstep.</p>
+        </section>
 
-            <div class="dish">
-                <img src="pizza.jpg" alt="Pizza">
-                <h2>Pizza</h2>
-                <p>$15</p>
-                <p>Cheesy pizza topped with pepperoni and olives.</p>
-                <button onclick="addToCart('Pizza', 15)">Add to Cart</button>
+        <section id="restaurants">
+            <h2>Available Restaurants</h2>
+            <div class="restaurant" onclick="viewMenu('Pizza Place')">
+                <h3>Pizza Place</h3>
+                <p>Italian Cuisine</p>
             </div>
-
-            <div class="dish">
-                <img src="pasta.jpg" alt="Pasta">
-                <h2>Pasta</h2>
-                <p>$12</p>
-                <p>Creamy pasta with chicken and mushroom sauce.</p>
-                <button onclick="addToCart('Pasta', 12)">Add to Cart</button>
+            <div class="restaurant" onclick="viewMenu('Burger Joint')">
+                <h3>Burger Joint</h3>
+                <p>American Cuisine</p>
+            </div>
+            <div class="restaurant" onclick="viewMenu('Sushi Spot')">
+                <h3>Sushi Spot</h3>
+                <p>Japanese Cuisine</p>
             </div>
         </section>
 
-        <section id="cart">
-            <h2>Cart</h2>
-            <ul id="cartItems"></ul>
-            <p>Total: $<span id="totalPrice">0</span></p>
-            <button onclick="checkout()">Checkout</button>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>We are dedicated to bringing you the best food delivery experience.</p>
         </section>
 
-        <div id="orderConfirmation" class="hidden">
-            <img src="order-placed.jpg" alt="Order Placed">
-            <h2>Your order has been placed successfully!</h2>
-            <button onclick="confirmOrder()">Confirm</button>
-        </div>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: support@fooddelivery.com</p>
+        </section>
     </main>
+
+    <footer>
+        <p>&copy; 2024 Food Delivery Service</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
 </html>
+
