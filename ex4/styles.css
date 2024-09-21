@@ -34,19 +34,10 @@ main {
     border: 1px solid #ccc;
     padding: 15px;
     margin: 10px 0;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.restaurant:hover {
-    background-color: #f0f0f0;
 }
 
 footer {
     text-align: center;
     padding: 10px;
     background-color: #f1f1f1;
-    position: relative;
-    bottom: 0;
-    width: 100%;
 }
