@@ -1,93 +1,60 @@
-let cart = [];
-
-// Sample restaurant data
-const restaurants = [
-    {
-        name: 'Pizza Place',
-        cuisine: 'Italian',
-        menu: [
-            { name: 'Margherita Pizza', price: 10 },
-            { name: 'Pepperoni Pizza', price: 12 },
-        ],
-    },
-    {
-        name: 'Burger Joint',
-        cuisine: 'American',
-        menu: [
-            { name: 'Cheeseburger', price: 8 },
-            { name: 'Veggie Burger', price: 7 },
-        ],
-    },
-    {
-        name: 'Sushi Spot',
-        cuisine: 'Japanese',
-        menu: [
-            { name: 'California Roll', price: 8 },
-            { name: 'Tuna Sashimi', price: 12 },
-        ],
-    },
+const menuItems = [
+    { id: 1, name: 'Burger', price: 5.99 },
+    { id: 2, name: 'Pizza', price: 8.99 },
+    { id: 3, name: 'Pasta', price: 7.49 },
+    { id: 4, name: 'Salad', price: 4.99 },
 ];
 
-// Fetch restaurants and display them
-function displayRestaurants() {
-    const restaurantList = document.getElementById('restaurantList');
+// Array to hold cart items
+let cart = [];
 
-    restaurants.forEach(restaurant => {
-        const div = document.createElement('div');
-        div.className = 'restaurant';
-        div.innerHTML = `
-            <h3>${restaurant.name}</h3>
-            <p>Cuisine: ${restaurant.cuisine}</p>
-            <h4>Menu</h4>
-            <ul>
-                ${restaurant.menu.map(item => `
-                    <li>${item.name} - $${item.price}
-                    <button onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
-                    </li>`).join('')}
-            </ul>
-        `;
-        restaurantList.appendChild(div);
+// Function to display menu items
+function displayMenu() {
+    const menuList = document.getElementById('menu-items');
+    menuItems.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = ${item.name} - $${item.price.toFixed(2)} <button onclick="addToCart(${item.id})">Add to Cart</button>;
+        menuList.appendChild(li);
     });
 }
 
-// Add items to the cart
-function addToCart(itemName, itemPrice) {
-    cart.push({ name: itemName, price: itemPrice });
-    updateCartDisplay();
+// Function to add items to cart
+function addToCart(itemId) {
+    const item = menuItems.find(menuItem => menuItem.id === itemId);
+    cart.push(item);
+    displayCart();
 }
 
-// Update cart display
-function updateCartDisplay() {
-    const cartList = document.getElementById('cart');
+// Function to display cart items
+function displayCart() {
+    const cartList = document.getElementById('cart-items');
     cartList.innerHTML = '';
 
+    let totalPrice = 0;
+    cart.forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = ${item.name} - $${item.price.toFixed(2)};
+        cartList.appendChild(li);
+        totalPrice += item.price;
+    });
+
+    document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+}
+
+// Function to handle order placement
+function placeOrder() {
     if (cart.length === 0) {
-        cartList.innerHTML = '<p>Your cart is empty.</p>';
-        document.getElementById('total').innerText = '';
+        alert('Your cart is empty.');
         return;
     }
 
-    let total = 0;
-    cart.forEach((item, index) => {
-        total += item.price;
-        cartList.innerHTML += `
-            <li>${item.name} - $${item.price}
-            <button onclick="removeFromCart(${index})">Remove</button>
-            </li>`;
-    });
-
-    document.getElementById('total').innerText = `Total: $${total}`;
+    alert('Order placed successfully!');
+    cart = []; // Clear the cart
+    displayCart();
 }
 
-// Remove items from the cart
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCartDisplay();
-}
-
-// Call the function to display restaurants when the page loads
-window.onload = displayRestaurants;
-
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
-    cartList.innerHTML += `<p>Total: $${total}</p>`;
-}
+// Initialize the menu and cart
+document.addEventListener('DOMContentLoaded', () => {
+    displayMenu();
+    document.getElementById('place-order').addEventListener('click', placeOrder);
+});
