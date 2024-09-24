@@ -3,54 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery App</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Food Delivery</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Food Delivery Service</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#restaurants">Restaurants</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <h1>Restaurant XYZ</h1>
+        <p>Order your favorite meals from Restaurant XYZ!</p>
     </header>
 
     <main>
-        <section id="home">
-            <h2>Welcome to Our Food Delivery Service</h2>
-            <p>Get your favorite food delivered to your doorstep.</p>
+        <section class="menu">
+            <h2>Our Menu</h2>
+            <ul id="menu-items">
+                <!-- Menu items will be injected here via JavaScript -->
+            </ul>
         </section>
 
-        <section id="restaurants">
-            <h2>Available Restaurants</h2>
-            <div id="restaurantList"></div>
-        </section>
-
-        <section id="cartSection">
+        <section class="cart">
             <h2>Your Cart</h2>
-            <ul id="cart"></ul>
-            <p id="total"></p>
-        </section>
-
-        <section id="about">
-            <h2>About Us</h2>
-            <p>We are dedicated to bringing you the best food delivery experience.</p>
-        </section>
-
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Email: support@fooddelivery.com</p>
+            <ul id="cart-items">
+                <!-- Cart items will be injected here -->
+            </ul>
+            <div class="total">
+                <p>Total: $<span id="total-price">0.00</span></p>
+                <button id="place-order">Place Order</button>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 Food Delivery Service</p>
+        <p>&copy; 2024 Food Delivery - Restaurant XYZ</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
