@@ -6,7 +6,7 @@ const menuItems = [
     { id: 5, name: "Cheeseburger", price: 11.99 },
 ];
 
-const cart = [];
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
 function renderMenu() {
     const menuList = document.getElementById("menu-items");
@@ -30,6 +30,7 @@ function addToCart(itemId) {
         cart.push({ ...item, quantity: 1 });
     }
 
+    localStorage.setItem('cart', JSON.stringify(cart));
     renderCart();
 }
 
@@ -56,10 +57,31 @@ document.getElementById("place-order").addEventListener("click", () => {
         return;
     }
 
-    alert("Order placed successfully!");
-    cart.length = 0; // Clear the cart
-    renderCart(); // Update cart display
+    let orderSummary = "Your Order:\n";
+    cart.forEach(item => {
+        orderSummary += `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}\n`;
+    });
+    orderSummary += `Total: $${document.getElementById("total-price").innerText}`;
+
+    if (confirm(orderSummary + "\nDo you want to place this order?")) {
+        alert("Order placed successfully!");
+        cart.length = 0; // Clear the cart
+        localStorage.removeItem('cart'); // Clear local storage
+        renderCart(); // Update cart display
+    }
 });
 
-// Initial rendering of the menu
+// Clear Cart Button
+const clearCartButton = document.createElement('button');
+clearCartButton.textContent = 'Clear Cart';
+clearCartButton.onclick = () => {
+    cart.length = 0; // Clear the cart
+    localStorage.removeItem('cart'); // Clear local storage
+    renderCart(); // Update cart display
+};
+
+document.querySelector('.cart').appendChild(clearCartButton);
+
+// Initial rendering of the menu and cart
 renderMenu();
+renderCart();
