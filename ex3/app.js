@@ -1,4 +1,9 @@
-let posts = [];
+let posts = JSON.parse(localStorage.getItem('posts')) || [];
+
+// Load existing posts from localStorage on page load
+document.addEventListener("DOMContentLoaded", () => {
+    renderPosts();
+});
 
 document.getElementById("postForm").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -17,6 +22,7 @@ document.getElementById("postForm").addEventListener("submit", function (e) {
     };
 
     posts.push(post);
+    localStorage.setItem('posts', JSON.stringify(posts)); // Save to localStorage
     renderPosts();
     this.reset(); // Reset the form
 });
@@ -59,11 +65,13 @@ function renderPosts() {
 
 function likePost(postId) {
     posts[postId].likes++;
+    localStorage.setItem('posts', JSON.stringify(posts)); // Update localStorage
     renderPosts();
 }
 
 function dislikePost(postId) {
     posts[postId].dislikes++;
+    localStorage.setItem('posts', JSON.stringify(posts)); // Update localStorage
     renderPosts();
 }
 
@@ -80,6 +88,7 @@ function addComment(postId) {
     };
 
     posts[postId].comments.push(comment);
+    localStorage.setItem('posts', JSON.stringify(posts)); // Update localStorage
     renderPosts();
 }
 
@@ -116,10 +125,12 @@ function addEmoji(postId, emoji) {
 
 function likeComment(postId, commentIndex) {
     posts[postId].comments[commentIndex].likes++;
+    localStorage.setItem('posts', JSON.stringify(posts)); // Update localStorage
     renderPosts();
 }
 
 function dislikeComment(postId, commentIndex) {
     posts[postId].comments[commentIndex].dislikes++;
+    localStorage.setItem('posts', JSON.stringify(posts)); // Update localStorage
     renderPosts();
 }
