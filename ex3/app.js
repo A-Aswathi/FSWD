@@ -1,58 +1,105 @@
-// app.js
+let posts = [];
 
-// Function to create a new post element
-function createPost(content, imageSrc, timestamp) {
-    const postElement = document.createElement('div');
-    postElement.classList.add('post');
-    
-    const postContent = document.createElement('p');
-    postContent.textContent = content;
-    
-    const postDate = document.createElement('small');
-    postDate.classList.add('timestamp');
-    postDate.textContent = timestamp;
-    
-    const postImage = document.createElement('img');
-    postImage.classList.add('post-image');
-    if (imageSrc) {
-        postImage.src = imageSrc;
-        postImage.style.display = 'block';
-    } else {
-        postImage.style.display = 'none';
-    }
-    
-    const likeButton = document.createElement('button');
-    likeButton.classList.add('like-button');
-    likeButton.innerHTML = '❤️ Like';
-    likeButton.addEventListener('click', function() {
-        this.classList.toggle('liked');
-        this.innerHTML = this.classList.contains('liked') ? '❤️ Liked' : '❤️ Like';
+document.getElementById("postForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const content = document.getElementById("postContent").value;
+    const imageFile = document.getElementById("postImage").files[0];
+
+    const postId = posts.length;
+    const post = {
+        id: postId,
+        content: content,
+        image: imageFile ? URL.createObjectURL(imageFile) : null,
+        likes: 0,
+        dislikes: 0,
+        comments: []
+    };
+
+    posts.push(post);
+    renderPosts();
+    this.reset(); // Reset the form
+});
+
+function renderPosts() {
+    const postsContainer = document.getElementById("postsContainer");
+    postsContainer.innerHTML = "";
+
+    posts.forEach(post => {
+        const postElement = document.createElement("div");
+        postElement.classList.add("post");
+        postElement.innerHTML = `
+            <p>${post.content}</p>
+            ${post.image ? `<img src="${post.image}" alt="Post Image">` : ""}
+            <div class="likes">Likes: <span id="like-count-${post.id}">${post.likes}</span> | 
+            Dislikes: <span id="dislike-count-${post.id}">${post.dislikes}</span></div>
+            <button onclick="likePost(${post.id})">Like</button>
+            <button onclick="dislikePost(${post.id})">Dislike</button>
+
+            <div class="comments">
+                <h4>Comments:</h4>
+                <div id="comments-${post.id}"></div>
+                <textarea id="comment-content-${post.id}" placeholder="Add a comment..."></textarea>
+                <button onclick="addComment(${post.id})">Comment</button>
+            </div>
+        `;
+        postsContainer.appendChild(postElement);
+        renderComments(post.id);
     });
-    
-    postElement.appendChild(postContent);
-    postElement.appendChild(postDate);
-    postElement.appendChild(postImage);
-    postElement.appendChild(likeButton);
-    
-    return postElement;
 }
 
-// Handle form submission
-document.getElementById('postForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
+function likePost(postId) {
+    posts[postId].likes++;
+    renderPosts();
+}
 
-    const postContent = document.getElementById('postContent').value.trim();
-    const postImage = document.getElementById('postImage').files[0];
-    
-    if (postContent) {
-        const postsContainer = document.getElementById('postsContainer');
-        
-        const timestamp = new Date().toLocaleString(); // Get current date and time
-        const imageSrc = postImage ? URL.createObjectURL(postImage) : null;
-        
-        const newPost = createPost(postContent, imageSrc, timestamp);
-        postsContainer.prepend(newPost); // Add new post to the top
-        document.getElementById('postContent').value = ''; // Clear the textarea
-        document.getElementById('postImage').value = ''; // Clear the file input
-    }
-});
+function dislikePost(postId) {
+    posts[postId].dislikes++;
+    renderPosts();
+}
+
+function addComment(postId) {
+    const commentContent = document.getElementById(`comment-content-${postId}`).value;
+
+    if (!commentContent) return;
+
+    const comment = {
+        content: commentContent,
+        likes: 0,
+        dislikes: 0
+    };
+
+    posts[postId].comments.push(comment);
+    renderPosts();
+}
+
+function renderComments(postId) {
+    const commentsContainer = document.getElementById(`comments-${postId}`);
+    commentsContainer.innerHTML = "";
+
+    posts[postId].comments.forEach((comment, index) => {
+        const commentElement = document.createElement("div");
+        commentElement.classList.add("comment");
+        commentElement.innerHTML = `
+            <p>${comment.content}</p>
+            <div class="comment-actions">
+                <div>Likes: <span id="comment-like-count-${postId}-${index}">${comment.likes}</span> | 
+                Dislikes: <span id="comment-dislike-count-${postId}-${index}">${comment.dislikes}</span></div>
+                <div>
+                    <button onclick="likeComment(${postId}, ${index})">Like</button>
+                    <button onclick="dislikeComment(${postId}, ${index})">Dislike</button>
+                </div>
+            </div>
+        `;
+        commentsContainer.appendChild(commentElement);
+    });
+}
+
+function likeComment(postId, commentIndex) {
+    posts[postId].comments[commentIndex].likes++;
+    renderPosts();
+}
+
+function dislikeComment(postId, commentIndex) {
+    posts[postId].comments[commentIndex].dislikes++;
+    renderPosts();
+}
