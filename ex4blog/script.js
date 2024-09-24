@@ -134,4 +134,3 @@ function dislikeComment(postId, commentIndex) {
     localStorage.setItem('posts', JSON.stringify(posts)); // Update localStorage
     renderPosts();
 }
-
