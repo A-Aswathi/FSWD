@@ -1,60 +1,65 @@
 const menuItems = [
-    { id: 1, name: 'Burger', price: 5.99 },
-    { id: 2, name: 'Pizza', price: 8.99 },
-    { id: 3, name: 'Pasta', price: 7.49 },
-    { id: 4, name: 'Salad', price: 4.99 },
+    { id: 1, name: "Margherita Pizza", price: 12.99 },
+    { id: 2, name: "Pepperoni Pizza", price: 14.99 },
+    { id: 3, name: "Caesar Salad", price: 9.99 },
+    { id: 4, name: "Spaghetti Carbonara", price: 13.99 },
+    { id: 5, name: "Cheeseburger", price: 11.99 },
 ];
 
-// Array to hold cart items
-let cart = [];
+const cart = [];
 
-// Function to display menu items
-function displayMenu() {
-    const menuList = document.getElementById('menu-items');
+function renderMenu() {
+    const menuList = document.getElementById("menu-items");
     menuItems.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = ${item.name} - $${item.price.toFixed(2)} <button onclick="addToCart(${item.id})">Add to Cart</button>;
+        const li = document.createElement("li");
+        li.innerHTML = `
+            ${item.name} - $${item.price.toFixed(2)} 
+            <button onclick="addToCart(${item.id})">Add to Cart</button>
+        `;
         menuList.appendChild(li);
     });
 }
 
-// Function to add items to cart
 function addToCart(itemId) {
-    const item = menuItems.find(menuItem => menuItem.id === itemId);
-    cart.push(item);
-    displayCart();
+    const item = menuItems.find(i => i.id === itemId);
+    const cartItem = cart.find(i => i.id === itemId);
+
+    if (cartItem) {
+        cartItem.quantity++;
+    } else {
+        cart.push({ ...item, quantity: 1 });
+    }
+
+    renderCart();
 }
 
-// Function to display cart items
-function displayCart() {
-    const cartList = document.getElementById('cart-items');
-    cartList.innerHTML = '';
-
+function renderCart() {
+    const cartList = document.getElementById("cart-items");
+    const totalPriceElement = document.getElementById("total-price");
+    
+    cartList.innerHTML = "";
     let totalPrice = 0;
+
     cart.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = ${item.name} - $${item.price.toFixed(2)};
+        totalPrice += item.price * item.quantity;
+        const li = document.createElement("li");
+        li.innerHTML = `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}`;
         cartList.appendChild(li);
-        totalPrice += item.price;
     });
 
-    document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+    totalPriceElement.innerText = totalPrice.toFixed(2);
 }
 
-// Function to handle order placement
-function placeOrder() {
+document.getElementById("place-order").addEventListener("click", () => {
     if (cart.length === 0) {
-        alert('Your cart is empty.');
+        alert("Your cart is empty!");
         return;
     }
 
-    alert('Order placed successfully!');
-    cart = []; // Clear the cart
-    displayCart();
-}
-
-// Initialize the menu and cart
-document.addEventListener('DOMContentLoaded', () => {
-    displayMenu();
-    document.getElementById('place-order').addEventListener('click', placeOrder);
+    alert("Order placed successfully!");
+    cart.length = 0; // Clear the cart
+    renderCart(); // Update cart display
 });
+
+// Initial rendering of the menu
+renderMenu();
