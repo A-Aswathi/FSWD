@@ -1,15 +1,17 @@
 const menuItems = [
-    { id: 1, name: "Margherita Pizza", price: 12.99 },
-    { id: 2, name: "Pepperoni Pizza", price: 14.99 },
-    { id: 3, name: "Caesar Salad", price: 9.99 },
-    { id: 4, name: "Spaghetti Carbonara", price: 13.99 },
-    { id: 5, name: "Cheeseburger", price: 11.99 },
+    { id: 1, name: "Margherita Pizza", price: 12.99, category: "Pizza" },
+    { id: 2, name: "Pepperoni Pizza", price: 14.99, category: "Pizza" },
+    { id: 3, name: "Caesar Salad", price: 9.99, category: "Salad" },
+    { id: 4, name: "Spaghetti Carbonara", price: 13.99, category: "Pasta" },
+    { id: 5, name: "Cheeseburger", price: 11.99, category: "Burger" },
 ];
 
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
+let user = null;
 
 function renderMenu() {
     const menuList = document.getElementById("menu-items");
+    menuList.innerHTML = ""; // Clear the list
     menuItems.forEach(item => {
         const li = document.createElement("li");
         li.innerHTML = `
@@ -44,11 +46,36 @@ function renderCart() {
     cart.forEach(item => {
         totalPrice += item.price * item.quantity;
         const li = document.createElement("li");
-        li.innerHTML = `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}`;
+        li.innerHTML = `
+            ${item.name} - $${item.price.toFixed(2)} x 
+            <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)">
+        `;
         cartList.appendChild(li);
     });
 
     totalPriceElement.innerText = totalPrice.toFixed(2);
+}
+
+function updateQuantity(itemId, quantity) {
+    const cartItem = cart.find(i => i.id === itemId);
+    if (cartItem) {
+        cartItem.quantity = parseInt(quantity);
+        if (cartItem.quantity <= 0) {
+            removeFromCart(itemId);
+        }
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+}
+
+function removeFromCart(itemId) {
+    const index = cart.findIndex(i => i.id === itemId);
+    if (index !== -1) {
+        cart.splice(index, 1);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
 }
 
 document.getElementById("place-order").addEventListener("click", () => {
@@ -71,17 +98,33 @@ document.getElementById("place-order").addEventListener("click", () => {
     }
 });
 
-// Clear Cart Button
-const clearCartButton = document.createElement('button');
-clearCartButton.textContent = 'Clear Cart';
-clearCartButton.onclick = () => {
+document.getElementById("clear-cart").addEventListener("click", () => {
     cart.length = 0; // Clear the cart
     localStorage.removeItem('cart'); // Clear local storage
     renderCart(); // Update cart display
-};
+});
 
-document.querySelector('.cart').appendChild(clearCartButton);
+document.getElementById("auth-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    user = { username, password };
+    alert("Logged in successfully!");
+    document.getElementById("auth-section").style.display = "none";
+    renderMenu();
+});
 
-// Initial rendering of the menu and cart
-renderMenu();
-renderCart();
+document.getElementById("toggle-dark-mode").addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+});
+
+function filterMenu() {
+    const searchQuery = document.getElementById("search").value.toLowerCase();
+    const filteredItems = menuItems.filter(item => 
+        item.name.toLowerCase().includes(searchQuery)
+    );
+    renderFilteredMenu(filteredItems);
+}
+
+function renderFilteredMenu(filteredItems
+
