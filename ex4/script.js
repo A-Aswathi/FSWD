@@ -110,11 +110,13 @@ const restaurants = [
             { id: 50, name: "Smoothie Bowl", price: 7.49 },
         ]
     }
+    
 ];
 
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
 const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
 
+// Function to render the restaurant menu
 function renderMenu() {
     const menuList = document.getElementById("menu-items");
     menuList.innerHTML = ''; // Clear existing menu items
@@ -148,6 +150,7 @@ function renderMenu() {
     });
 }
 
+// Function to add items to the cart
 function addToCart(itemId) {
     const item = restaurants.flatMap(r => r.menuItems).find(i => i.id === itemId);
     const cartItem = cart.find(i => i.id === itemId);
@@ -162,10 +165,11 @@ function addToCart(itemId) {
     renderCart();
 }
 
+// Function to render the cart
 function renderCart() {
     const cartList = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
-    const cartActions = document.querySelector('.cart-actions'); // Select the cart actions container
+    const cartActions = document.querySelector('.cart-actions');
     
     cartList.innerHTML = "";
     let totalPrice = 0;
@@ -178,12 +182,10 @@ function renderCart() {
     });
 
     totalPriceElement.innerText = totalPrice.toFixed(2);
-    
-    // Show or hide the cart actions (total price and buttons)
     cartActions.style.display = cart.length > 0 ? 'block' : 'none';
 }
 
-
+// Function to render order history
 function renderOrderHistory() {
     const orderHistoryList = document.getElementById("order-history-list");
     orderHistoryList.innerHTML = ""; // Clear existing order history
@@ -195,6 +197,7 @@ function renderOrderHistory() {
     });
 }
 
+// Event listener for placing an order
 document.getElementById("place-order").addEventListener("click", () => {
     if (cart.length === 0) {
         alert("Your cart is empty!");
@@ -211,13 +214,9 @@ document.getElementById("place-order").addEventListener("click", () => {
         alert("Order placed successfully!");
 
         // Add to order history
+        const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         orderHistory.push({
-            items: cart.map(item => ({
-                name: item.name,
-                price: item.price,
-                quantity: item.quantity
-            })),
-            total: totalPriceElement.innerText,
+            total: totalPrice.toFixed(2),
             date: new Date().toLocaleString()
         });
 
@@ -238,9 +237,8 @@ document.getElementById('clear-cart').addEventListener('click', () => {
     }
 });
 
-// Initialize menu and cart on page load
+// Initialize menu, cart, and order history on page load
 renderMenu();
 renderCart();
 renderOrderHistory();
-
 
