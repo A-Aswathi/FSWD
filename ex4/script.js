@@ -158,7 +158,9 @@ function addToCart(itemId) {
     if (cartItem) {
         cartItem.quantity++;
     } else {
-        cart.push({ ...item, quantity: 1 });
+        // Add restaurant name to the cart item
+        const restaurant = restaurants.find(r => r.menuItems.some(menuItem => menuItem.id === itemId));
+        cart.push({ ...item, quantity: 1, restaurantName: restaurant.name });
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -206,7 +208,7 @@ document.getElementById("place-order").addEventListener("click", () => {
 
     let orderSummary = "Your Order:\n";
     cart.forEach(item => {
-        orderSummary += `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}\n`;
+        orderSummary += `${item.restaurantName} - ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}\n`;
     });
     orderSummary += `Total: $${document.getElementById("total-price").innerText}`;
 
