@@ -111,6 +111,7 @@ const restaurants = [
         ]
     }
 ];
+];
 
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
 const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
@@ -121,7 +122,19 @@ function renderMenu() {
     restaurants.forEach(restaurant => {
         const restaurantHeader = document.createElement("h3");
         restaurantHeader.innerText = restaurant.name;
+
+        // Add click event to toggle menu items
+        restaurantHeader.onclick = () => {
+            const menuItems = document.getElementById(`menu-items-${restaurant.id}`);
+            menuItems.style.display = menuItems.style.display === 'none' ? 'block' : 'none';
+        };
+
         menuList.appendChild(restaurantHeader);
+
+        // Create a UL for menu items
+        const menuItemsList = document.createElement("ul");
+        menuItemsList.id = `menu-items-${restaurant.id}`;
+        menuItemsList.style.display = 'none'; // Start hidden
 
         restaurant.menuItems.forEach(item => {
             const li = document.createElement("li");
@@ -129,8 +142,10 @@ function renderMenu() {
                 ${item.name} - $${item.price.toFixed(2)} 
                 <button onclick="addToCart(${item.id})">Add to Cart</button>
             `;
-            menuList.appendChild(li);
+            menuItemsList.appendChild(li);
         });
+
+        menuList.appendChild(menuItemsList); // Add menu items list to the menu list
     });
 }
 
@@ -165,6 +180,17 @@ function renderCart() {
     totalPriceElement.innerText = totalPrice.toFixed(2);
 }
 
+function renderOrderHistory() {
+    const orderHistoryList = document.getElementById("order-history-list");
+    orderHistoryList.innerHTML = ""; // Clear existing order history
+
+    orderHistory.forEach(order => {
+        const li = document.createElement("li");
+        li.innerHTML = `Order on ${order.date}: Total $${order.total}`;
+        orderHistoryList.appendChild(li);
+    });
+}
+
 document.getElementById("place-order").addEventListener("click", () => {
     if (cart.length === 0) {
         alert("Your cart is empty!");
@@ -179,7 +205,7 @@ document.getElementById("place-order").addEventListener("click", () => {
 
     if (confirm(orderSummary + "\nDo you want to place this order?")) {
         alert("Order placed successfully!");
-        
+
         // Add to order history
         orderHistory.push({
             items: cart.map(item => ({
@@ -190,7 +216,7 @@ document.getElementById("place-order").addEventListener("click", () => {
             total: totalPriceElement.innerText,
             date: new Date().toLocaleString()
         });
-        
+
         localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
         cart.length = 0; // Clear the cart
         localStorage.removeItem('cart'); // Clear local storage
@@ -200,7 +226,16 @@ document.getElementById("place-order").addEventListener("click", () => {
 });
 
 // Clear Cart Button
-const clearCartButton = document.createElement('button');
-clearCartButton.textContent = 'Clear Cart';
-clear
+document.getElementById('clear-cart').addEventListener('click', () => {
+    if (confirm("Are you sure you want to clear the cart?")) {
+        cart.length = 0; // Clear the cart
+        localStorage.removeItem('cart'); // Clear local storage
+        renderCart(); // Update cart display
+    }
+});
+
+// Initialize menu and cart on page load
+renderMenu();
+renderCart();
+renderOrderHistory();
 
