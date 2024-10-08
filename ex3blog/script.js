@@ -53,6 +53,7 @@ function createPost() {
             content,
             author: currentUser.username,
             likes: 0,
+            dislikes: 0,
             comments: [],
             timestamp: new Date().toLocaleString(),
             image: event.target.result
@@ -66,7 +67,7 @@ function createPost() {
     if (imageFile) {
         reader.readAsDataURL(imageFile);
     } else {
-        const post = { content, author: currentUser.username, likes: 0, comments: [], timestamp: new Date().toLocaleString(), image: '' };
+        const post = { content, author: currentUser.username, likes: 0, dislikes: 0, comments: [], timestamp: new Date().toLocaleString(), image: '' };
         posts.push(post);
         localStorage.setItem('posts', JSON.stringify(posts));
         clearPostInputs();
@@ -100,8 +101,8 @@ function createPostElement(post) {
             <span>${post.content}</span><br>
             <span class="timestamp">${post.timestamp}</span><br>
         </div>
-        <span>Likes: <span class="red-heart">${post.likes} ❤</span></span><br>
-        <span>Comments: ${post.comments.length}</span><br>
+        <span>Likes: <span class="red-heart">${post.likes} ❤️</span></span>
+        <span>Dislikes: <span class="red-heart">${post.dislikes} 💔</span></span><br>
     `;
 
     if (post.image) {
@@ -112,8 +113,9 @@ function createPostElement(post) {
         postDiv.appendChild(img);
     }
 
-    // Event listeners for likes
+    // Event listeners for likes and dislikes
     postDiv.querySelector('.red-heart').onclick = () => updateLikes(post);
+    postDiv.querySelector('.red-heart').onclick = () => updateDislikes(post);
     
     // Comment section
     const commentBtn = document.createElement('button');
@@ -130,6 +132,13 @@ function createPostElement(post) {
 // Update likes count
 function updateLikes(post) {
     post.likes++;
+    localStorage.setItem('posts', JSON.stringify(posts));
+    loadFeed();
+}
+
+// Update dislikes count
+function updateDislikes(post) {
+    post.dislikes++;
     localStorage.setItem('posts', JSON.stringify(posts));
     loadFeed();
 }
@@ -158,16 +167,25 @@ function createCommentElement(postDiv, comment) {
     commentDiv.innerHTML = `
         <strong>${comment.author}</strong>: ${comment.comment} 
         <span class="timestamp">${comment.timestamp}</span><br>
-        Likes: <span class="red-heart">${comment.likes} ❤</span>
+        Likes: <span class="red-heart">${comment.likes} ❤️</span>
+        Dislikes: <span class="red-heart">${comment.dislikes} 💔</span>
     `;
 
     commentDiv.querySelector('.red-heart').onclick = () => updateCommentLikes(comment);
+    commentDiv.querySelector('.red-heart').onclick = () => updateCommentDislikes(comment);
     postDiv.appendChild(commentDiv);
 }
 
 // Update likes for comments
 function updateCommentLikes(comment) {
     comment.likes++;
+    localStorage.setItem('posts', JSON.stringify(posts));
+    loadFeed();
+}
+
+// Update dislikes for comments
+function updateCommentDislikes(comment) {
+    comment.dislikes++;
     localStorage.setItem('posts', JSON.stringify(posts));
     loadFeed();
 }
