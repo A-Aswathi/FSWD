@@ -1,71 +1,87 @@
-body {
-    font-family: Arial, sans-serif;
+/* Basic Reset */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
 }
 
 header {
-    background-color: #ff6347;
+    background: #ff6347; /* Tomato color */
     color: white;
     padding: 20px;
     text-align: center;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+h1 {
+    margin-bottom: 10px;
 }
 
-.menu, .cart {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+.cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#menu, #cart, #order-history {
+    margin: 20px;
     padding: 20px;
-    width: 90%;
-    max-width: 600px;
-    margin: 10px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    color: #333;
+    margin-bottom: 15px;
 }
 
 ul {
-    list-style: none;
-    padding: 0;
+    list-style-type: none;
 }
 
 li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
     display: flex;
     justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    align-items: center;
 }
 
 button {
     background-color: #ff6347;
     color: white;
     border: none;
-    padding: 10px;
+    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background-color: #ff4500;
+    background-color: #e55342; /* Darker shade */
 }
 
-.total {
-    margin-top: 20px;
-    text-align: right;
+#total-price {
+    font-weight: bold;
 }
 
-@media (max-width: 600px) {
-    main {
-        flex-direction: column;
-        padding: 10px;
-    }
+#clear-cart {
+    margin-top: 10px;
+    background-color: #e74c3c;
 }
+
+#clear-cart:hover {
+    background-color: #c0392b; /* Darker red */
+}
+
+#order-history-list li {
+    display: flex;
+    flex-direction: column;
+}
+
