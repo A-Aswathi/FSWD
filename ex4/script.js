@@ -165,6 +165,7 @@ function addToCart(itemId) {
 function renderCart() {
     const cartList = document.getElementById("cart-items");
     const totalPriceElement = document.getElementById("total-price");
+    const cartActions = document.querySelector('.cart-actions'); // Select the cart actions container
     
     cartList.innerHTML = "";
     let totalPrice = 0;
@@ -178,9 +179,10 @@ function renderCart() {
 
     totalPriceElement.innerText = totalPrice.toFixed(2);
     
-    // Show or hide the "Place Order" button
-    document.getElementById("place-order").style.display = cart.length > 0 ? 'inline' : 'none';
+    // Show or hide the cart actions (total price and buttons)
+    cartActions.style.display = cart.length > 0 ? 'block' : 'none';
 }
+
 
 function renderOrderHistory() {
     const orderHistoryList = document.getElementById("order-history-list");
