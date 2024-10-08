@@ -111,7 +111,6 @@ const restaurants = [
         ]
     }
 ];
-];
 
 const cart = JSON.parse(localStorage.getItem('cart')) || [];
 const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
@@ -178,6 +177,9 @@ function renderCart() {
     });
 
     totalPriceElement.innerText = totalPrice.toFixed(2);
+    
+    // Show or hide the "Place Order" button
+    document.getElementById("place-order").style.display = cart.length > 0 ? 'inline' : 'none';
 }
 
 function renderOrderHistory() {
@@ -238,4 +240,5 @@ document.getElementById('clear-cart').addEventListener('click', () => {
 renderMenu();
 renderCart();
 renderOrderHistory();
+
 
