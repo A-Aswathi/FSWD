@@ -53,7 +53,7 @@ function createPost() {
             content,
             author: currentUser.username,
             likes: 0,
-            dislikes: 0;
+            dislikes: 0,
             comments: [],
             timestamp: new Date().toLocaleString(),
             image: event.target.result
