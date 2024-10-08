@@ -12,6 +12,7 @@
         <div class="cart">
             <button id="place-order">Place Order</button>
             <span id="total-price">Total: $0.00</span>
+            <button id="clear-cart">Clear Cart</button>
         </div>
     </header>
     
@@ -24,7 +25,6 @@
         <section id="cart">
             <h2>Your Cart</h2>
             <ul id="cart-items"></ul>
-            <button id="clear-cart">Clear Cart</button>
         </section>
 
         <section id="order-history">
@@ -34,20 +34,6 @@
     </main>
 
     <script src="script.js"></script>
-    <script>
-        // Clear Cart Functionality
-        document.getElementById('clear-cart').addEventListener('click', () => {
-            if (confirm("Are you sure you want to clear the cart?")) {
-                cart.length = 0; // Clear the cart
-                localStorage.removeItem('cart'); // Clear local storage
-                renderCart(); // Update cart display
-            }
-        });
-
-        // Initialize menu and cart on page load
-        renderMenu();
-        renderCart();
-        renderOrderHistory();
-    </script>
 </body>
 </html>
+
