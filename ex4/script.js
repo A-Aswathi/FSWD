@@ -229,43 +229,6 @@ document.getElementById("place-order").addEventListener("click", () => {
     }
 });
 
-// Function to save order history to localStorage
-function saveOrderHistory() {
-    localStorage.setItem("orderHistory", JSON.stringify(orderHistory));
-}
-
-// Function to load order history from localStorage
-function loadOrderHistory() {
-    const storedOrderHistory = localStorage.getItem("orderHistory");
-    return storedOrderHistory ? JSON.parse(storedOrderHistory) : [];
-}
-
-// Initialize orderHistory from localStorage
-let orderHistory = loadOrderHistory();
-
-function renderOrderHistory() {
-    const orderHistoryList = document.getElementById("order-history-list");
-    orderHistoryList.innerHTML = ""; // Clear existing order history
-
-    orderHistory.forEach(order => {
-        const li = document.createElement("li");
-        li.innerHTML = `Order on ${order.date}: Total $${order.total}`; // Use template literals correctly
-        orderHistoryList.appendChild(li);
-    });
-}
-
-// Call renderOrderHistory to display the order history when the page loads
-renderOrderHistory();
-
-// Example function to add an order and save to localStorage
-function addOrder(date, total) {
-    const newOrder = { date, total };
-    orderHistory.push(newOrder);
-    saveOrderHistory(); // Save the updated order history
-    renderOrderHistory(); // Re-render the list
-}
-
-
 // Clear Cart Button
 document.getElementById('clear-cart').addEventListener('click', () => {
     if (confirm("Are you sure you want to clear the cart?")) {
