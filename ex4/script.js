@@ -251,4 +251,3 @@ document.getElementById('clear-cart').addEventListener('click', () => {
 renderMenu();
 renderCart();
 renderOrderHistory();
-
