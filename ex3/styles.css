@@ -1,101 +1,147 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
+        font-family: 'Roboto', sans-serif; /* Changed to Roboto font */
+        background-color: #e7f3ff; /* Light blue background */
+    }
+
+#auth-section {
+    width: 320px;
+    margin: 20px auto;
     padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #98b0dd, #7294d3); /* Softer gradient */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Increased shadow */
 }
 
-.container {
-    max-width: 600px;
-    margin: auto;
-    background: white;
+#user-section {
+    width: 800px;
+    margin: 20px auto;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-textarea {
-    width: 100%;
-    height: 100px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
+#auth-section input, #user-section textarea {
+    width: 90%;
+    padding: 12px; /* Increased padding for better touch targets */
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px;
+    transition: border-color 0.3s;
+}
+
+#auth-section input:focus, #user-section textarea:focus {
+    border-color: #007bff; /* Focus border color */
 }
 
 button {
-    background-color: #28a745;
+    padding: 10px 15px; /* Increased button size */
+    margin: 5px;
+    background-color: #2681be; /* Purple button */
     color: white;
     border: none;
-    padding: 10px 15px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #2681be; /* Darker purple on hover */
+    transform: scale(1.05); /* Slight scaling on hover */
 }
 
 .post {
-    margin: 20px 0;
-    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    background: #f9f9f9;
+    padding: 20px; /* Increased padding for posts */
+    margin-bottom: 20px;
+    background-color: #f1f8ff; /* Light background for posts */
+    border-radius: 10px;
+    color: #333;
+    transition: transform 0.2s;
 }
 
-.post img {
-    max-width: 100%;
-    height: auto;
+.post:hover {
+    transform: translateY(-3px); /* Slight lift on hover */
 }
 
-.likes, .comments {
-    margin-top: 10px;
+.feed-content {
+    margin-bottom: 8px;
 }
 
-.date-time {
+.timestamp {
     font-size: 0.9em;
-    color: gray;
+    color: #777; /* Softer timestamp color */
+    font-style: italic;
+}
+
+.red-heart {
+    color: #e63946; /* Red color */
+    cursor: pointer;
+}
+
+.brown-thumb {
+    color: #d77f00; /* Brown color */
+    cursor: pointer;
 }
 
 .comment {
-    margin: 10px 0;
+    margin-left: 20px;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    background-color: #e9f5ff; /* Light comment background */
     padding: 10px;
-    background: #e9ecef;
     border-radius: 5px;
 }
 
-.comment textarea {
-    width: 100%;
-    height: 40px;
-    margin-bottom: 5px;
+.comment strong {
+    color: #007bff; /* Stronger color for comment authors */
 }
 
-.emoji-reactions {
-    display: flex;
+.reactions {
     margin-top: 10px;
+    padding-left: 20px;
+    font-size: 0.9em;
 }
 
-.emoji {
-    cursor: pointer;
-    font-size: 20px;
+.reactions span {
     margin-right: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.3s;
 }
 
-.comment-actions {
+.reactions span:hover {
+    transform: scale(1.2);
+    color: #ff6f61; /* Color change on hover */
+}
+
+.follow-btn {
+    background-color: #2681be; /* Green follow button */
+}
+
+.follow-btn:hover {
+    background-color: #2681be; /* Darker green on hover */
+}
+
+.feed-item {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
-.comment-actions div {
-    display: flex;
-    align-items: center;
+#post-creation {
+    margin-bottom: 20px;
 }
 
-.comment-actions button {
-    margin-left: 5px;
+h2, h3 {
+    color: #012357; /* Tomato color for headings */
 }
 
-.hidden {
-    display: none;
+h2 {
+    font-size: 1.6em; /* Slightly larger for h2 */
 }
+
+h3 {
+    font-size: 1.3em; /* Slightly larger for h3 */
+}
+
