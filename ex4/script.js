@@ -32,7 +32,7 @@ const restaurants = [
             { id: 15, name: "Green Tea Ice Cream", price: 4.99 },
         ]
     },
-    // Add more restaurants and items here...
+    
     {
         id: 4,
         name: "Mexican Fiesta",
@@ -145,9 +145,12 @@ function renderMenu() {
             const itemDiv = document.createElement("div");
             itemDiv.style.textAlign = 'center'; // Center the text
             itemDiv.style.flex = '1 0 20%'; // Control item size
+            itemDiv.style.border = '1px solid #ccc'; // Add border
+            itemDiv.style.padding = '10px'; // Add padding
+            itemDiv.style.borderRadius = '5px'; // Rounded corners
 
             itemDiv.innerHTML = `
-                <div>${item.name} - $${item.price.toFixed(2)}</div>
+                <div>${item.name} - ₹${item.price.toFixed(2)}</div>
                 <button onclick="addToCart(${item.id})">Add to Cart</button>
             `;
             menuItemsContainer.appendChild(itemDiv);
@@ -156,7 +159,6 @@ function renderMenu() {
         menuList.appendChild(menuItemsContainer); // Add menu items container to the menu list
     });
 }
-
 
 // Function to add items to the cart
 function addToCart(itemId) {
@@ -187,11 +189,11 @@ function renderCart() {
     cart.forEach(item => {
         totalPrice += item.price * item.quantity;
         const li = document.createElement("li");
-        li.innerHTML = `${item.name} - $${item.price.toFixed(2)} x ${item.quantity}`;
+        li.innerHTML = `${item.name} - ₹${item.price.toFixed(2)} x ${item.quantity}`;
         cartList.appendChild(li);
     });
 
-    totalPriceElement.innerText = totalPrice.toFixed(2);
+    totalPriceElement.innerText = `₹${totalPrice.toFixed(2)}`;
     cartActions.style.display = cart.length > 0 ? 'block' : 'none';
 }
 
@@ -202,7 +204,7 @@ function renderOrderHistory() {
 
     orderHistory.forEach(order => {
         const li = document.createElement("li");
-        li.innerHTML = `Order on ${order.date}: Total $${order.total}`;
+        li.innerHTML = `Order on ${order.date}: Total ₹${order.total}`;
         orderHistoryList.appendChild(li);
     });
 }
@@ -216,9 +218,9 @@ document.getElementById("place-order").addEventListener("click", () => {
 
     let orderSummary = "Your Order:\n";
     cart.forEach(item => {
-        orderSummary += `${item.restaurantName} - ${item.name} - $${item.price.toFixed(2)} x ${item.quantity}\n`;
+        orderSummary += `${item.restaurantName} - ${item.name} - ₹${item.price.toFixed(2)} x ${item.quantity}\n`;
     });
-    orderSummary += `Total: $${document.getElementById("total-price").innerText}`;
+    orderSummary += `Total: ₹${document.getElementById("total-price").innerText}`;
 
     if (confirm(orderSummary + "\nDo you want to place this order?")) {
         alert("Order placed successfully!");
