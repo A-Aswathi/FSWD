@@ -120,35 +120,43 @@ const orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
 function renderMenu() {
     const menuList = document.getElementById("menu-items");
     menuList.innerHTML = ''; // Clear existing menu items
+
     restaurants.forEach(restaurant => {
         const restaurantHeader = document.createElement("h3");
         restaurantHeader.innerText = restaurant.name;
 
         // Add click event to toggle menu items
         restaurantHeader.onclick = () => {
-            const menuItems = document.getElementById(`menu-items-${restaurant.id}`);
-            menuItems.style.display = menuItems.style.display === 'none' ? 'block' : 'none';
+            const menuItemsContainer = document.getElementById(`menu-items-${restaurant.id}`);
+            menuItemsContainer.style.display = menuItemsContainer.style.display === 'none' ? 'flex' : 'none';
         };
 
         menuList.appendChild(restaurantHeader);
 
-        // Create a UL for menu items
-        const menuItemsList = document.createElement("ul");
-        menuItemsList.id = `menu-items-${restaurant.id}`;
-        menuItemsList.style.display = 'none'; // Start hidden
+        // Create a DIV for menu items
+        const menuItemsContainer = document.createElement("div");
+        menuItemsContainer.id = `menu-items-${restaurant.id}`;
+        menuItemsContainer.style.display = 'none'; // Start hidden
+        menuItemsContainer.style.flexWrap = 'wrap'; // Allow items to wrap
+        menuItemsContainer.style.gap = '20px'; // Space between items
+        menuItemsContainer.style.justifyContent = 'flex-start'; // Align items to the start
 
         restaurant.menuItems.forEach(item => {
-            const li = document.createElement("li");
-            li.innerHTML = `
-                ${item.name} - $${item.price.toFixed(2)} 
+            const itemDiv = document.createElement("div");
+            itemDiv.style.textAlign = 'center'; // Center the text
+            itemDiv.style.flex = '1 0 20%'; // Control item size
+
+            itemDiv.innerHTML = `
+                <div>${item.name} - $${item.price.toFixed(2)}</div>
                 <button onclick="addToCart(${item.id})">Add to Cart</button>
             `;
-            menuItemsList.appendChild(li);
+            menuItemsContainer.appendChild(itemDiv);
         });
 
-        menuList.appendChild(menuItemsList); // Add menu items list to the menu list
+        menuList.appendChild(menuItemsContainer); // Add menu items container to the menu list
     });
 }
+
 
 // Function to add items to the cart
 function addToCart(itemId) {
