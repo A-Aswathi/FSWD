@@ -107,7 +107,7 @@ function loadFeed() {
                 <span>${post.content}</span><br>
             </div>
             <span>Likes: <span class="red-heart">${post.likes} ❤️</span></span>
-            <span>Dislikes: <span class="brown-thumb">${post.dislikes} 👎</span></span><br>
+            <span>Dislikes: <span class="brown-thumb">${post.dislikes} 💔</span></span><br>
             <span>Comments: ${post.comments.length}</span><br>
         `;
 
@@ -179,7 +179,7 @@ function displayComments(post, postDiv) {
             <strong>${comment.author}</strong>: ${comment.comment} 
             <span class="timestamp">${comment.timestamp}</span><br>
             Likes: <span class="red-heart">${comment.likes} ❤️</span>
-            Dislikes: <span class="brown-thumb">${comment.dislikes} 👎</span>
+            Dislikes: <span class="brown-thumb">${comment.dislikes} 💔</span>
             <button class="reaction-btn">React 😊</button>
             <div class="reactions" style="display:none;"></div>
         `;
