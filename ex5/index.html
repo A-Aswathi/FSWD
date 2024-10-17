@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy & Sell Used Products</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Buy & Sell Used Products</h1>
+</header>
+
+<div class="container">
+    <div id="login-page">
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" />
+        <input type="password" id="password" placeholder="Password" />
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="home-page" class="hidden">
+        <h2>Products</h2>
+        <div id="product-list"></div>
+        <h3>Add New Product</h3>
+        <input type="text" id="product-name" placeholder="Product Name" />
+        <input type="text" id="product-image" placeholder="Image URL" />
+        <input type="text" id="product-condition" placeholder="Condition" />
+        <input type="text" id="delivery-address" placeholder="Delivery Address" />
+        <input type="number" id="product-rating" placeholder="Rating (1-5)" min="1" max="5" />
+        <button onclick="addProduct()">Add Product</button>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
 
