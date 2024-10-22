@@ -3,37 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buy & Sell Used Products</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>RETRY</title>
+    <link rel="stylesheet" href="styles.css"> <!-- External CSS link -->
 </head>
 <body>
 
-<header>
-    <h1>Buy & Sell Used Products</h1>
-</header>
-
-<div class="container">
-    <div id="login-page">
+    <div id="login">
         <h2>Login</h2>
-        <input type="text" id="username" placeholder="Username" />
-        <input type="password" id="password" placeholder="Password" />
-        <button onclick="login()">Login</button>
+        <label>Username: <input type="text" id="username" required></label>
+        <label>Password: <input type="password" id="password" required></label>
+        <button onclick="redirectToHome(event)">Login</button>
     </div>
 
-    <div id="home-page" class="hidden">
-        <h2>Products</h2>
-        <div id="product-list"></div>
-        <h3>Add New Product</h3>
-        <input type="text" id="product-name" placeholder="Product Name" />
-        <input type="text" id="product-image" placeholder="Image URL" />
-        <input type="text" id="product-condition" placeholder="Condition" />
-        <input type="text" id="delivery-address" placeholder="Delivery Address" />
-        <input type="number" id="product-rating" placeholder="Rating (1-5)" min="1" max="5" />
-        <button onclick="addProduct()">Add Product</button>
+    <div id="home" class="hidden">
+        <h1>Welcome to the Product Store</h1>
+        <div id="products-container"></div>
+        <div>
+            <span>Cart: <span id="cart-count">0</span></span>
+            <button id="cart-link">View Cart</button>
+            <button id="order-history-link">Order History</button>
+            <button id="logout-link" class="hidden">Logout</button>
+        </div>
     </div>
-</div>
 
-<script src="script.js"></script>
+    <div id="product-details" class="hidden"></div>
+
+    <div id="cart" class="hidden">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <button onclick="checkout()">Checkout</button>
+        <button onclick="goBackToHome()">Back</button>
+    </div>
+
+    <div id="checkout" class="hidden">
+        <h2>Checkout</h2>
+        <form id="checkout-form" onsubmit="showCustomerDetails(event)">
+            <h3>Customer Details</h3>
+            <label>Name: <input type="text" id="user-name" required></label>
+            <label>Phone: <input type="text" id="user-phone" required></label>
+            <label>Address: <input type="text" id="user-address" required></label>
+            <label>Email: <input type="email" id="user-email" required></label>
+            <button type="submit">Place Order</button>
+        </form>
+        <button onclick="goBackToHome()">Back</button>
+    </div>
+
+    <div id="order-confirmation" class="hidden">
+        <h2>Order Confirmation</h2>
+        <div id="order-details"></div>
+        <button onclick="goBackToHome()">Back to Home</button>
+    </div>
+
+    <div id="order-history" class="hidden">
+        <h2>Order History</h2>
+        <div id="order-history-items"></div>
+        <button onclick="goBackToHome()">Back</button>
+    </div>
+
+    <div id="order-summary" class="hidden">
+        <h2>Order Summary</h2>
+        <div id="order-details"></div>
+        <button onclick="placeOrder(event)">Place Order</button>
+        <button onclick="goBackToCheckout()">Edit Details</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Product Store. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
-
