@@ -5,10 +5,6 @@ const products = [
     { id: 4, name: "Old Books Collection", description: "A collection of classic novels.", condition: "Good", seller: "Emily White", rating: 4, date: new Date().toLocaleString(), imageUrl: "path/to/books-image.jpg" },
     { id: 5, name: "Gaming Console", description: "Used gaming console with games.", condition: "Good", seller: "Mike Johnson", rating: 5, date: new Date().toLocaleString(), imageUrl: "path/to/console-image.jpg" },
     { id: 6, name: "Mountain Bike", description: "Perfect for adventure seekers.", condition: "Good", seller: "Sarah Parker", rating: 4, date: new Date().toLocaleString(), imageUrl: "path/to/mountain-bike-image.jpg" },
-    { id: 7, name: "Smartphone", description: "Latest model in excellent condition.", condition: "Like New", seller: "Chris Green", rating: 5, date: new Date().toLocaleString(), imageUrl: "path/to/smartphone-image.jpg" },
-    { id: 8, name: "Table and Chairs", description: "Solid wood furniture set.", condition: "Fair", seller: "Nancy Wilson", rating: 3, date: new Date().toLocaleString(), imageUrl: "path/to/table-chairs-image.jpg" },
-    { id: 9, name: "Bicycle", description: "Ideal for city commuting.", condition: "Good", seller: "David Brown", rating: 4, date: new Date().toLocaleString(), imageUrl: "path/to/bicycle-image.jpg" },
-    { id: 10, name: "Old Vinyl Records", description: "Classic music collection.", condition: "Good", seller: "Anna Bell", rating: 4, date: new Date().toLocaleString(), imageUrl: "path/to/vinyl-records-image.jpg" }
 ];
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
