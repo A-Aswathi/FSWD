@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <h1>Project Management </h1>
+    </div>
+
+    <div>
+        <div class="task-container">
+            <div class="task-column" id="pending">
+                <h2>Pending Tasks</h2>
+                <ul id="pending-tasks" class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <!-- Tasks will be added dynamically here -->
+                </ul>
+                <button onclick="addTask('pending')">Add Task</button>
+            </div>
+
+            <div class="task-column" id="in-progress">
+                <h2>In Progress</h2>
+                <ul id="in-progress-tasks" class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <!-- Tasks will be added dynamically here -->
+                </ul>
+                <button onclick="addTask('in-progress')">Add Task</button>
+            </div>
+
+            <div class="task-column" id="complete">
+                <h2>Completed Tasks</h2>
+                <ul id="completed-tasks" class="task-list" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <!-- Tasks will be added dynamically here -->
+                </ul>
+                <button onclick="addTask('complete')">Add Task</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
