@@ -1,27 +1,27 @@
 /* General Styles */
-
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f7f6;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
     color: #333;
 }
 
 .container {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
 }
 
 h1 {
     text-align: center;
     color: #b4a251;
-    font-size: 34px;
-    margin-bottom: 15px;
+    font-size: 36px;
+    margin-bottom: 20px;
     font-weight: bold;
 }
 
+/* Image styling */
 .leave-image {
     display: block;
     max-width: 100%;
@@ -36,29 +36,29 @@ h1 {
     flex-direction: column;
     align-items: center;
     margin-top: 40px;
-    padding: 25px;
-    background-color: white;
+    padding: 30px;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #loginForm {
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
 }
 
 #loginForm label {
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 18px;
+    margin-bottom: 10px;
     display: block;
     font-weight: 600;
-    color: #333;
+    color: #444;
 }
 
 #loginForm input[type="text"] {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 14px;
+    margin-bottom: 18px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -74,7 +74,7 @@ h1 {
 button {
     background-color: #b4a251;
     color: white;
-    padding: 12px 20px;
+    padding: 14px 24px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -96,21 +96,21 @@ button:focus {
     display: none;
     margin-top: 40px;
     padding: 30px;
-    background-color: white;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #leaveContainer h2 {
     text-align: center;
-    font-size: 28px;
+    font-size: 30px;
     color: #b4a251;
     margin-bottom: 20px;
 }
 
 #leaveBalances {
     font-size: 18px;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     font-weight: 600;
 }
 
@@ -120,18 +120,18 @@ button:focus {
 
 form label {
     display: block;
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 18px;
+    margin-bottom: 10px;
     font-weight: 600;
-    color: #333;
+    color: #444;
 }
 
 form input,
 form select,
 form textarea {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
+    padding: 14px;
+    margin-bottom: 18px;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 16px;
@@ -162,7 +162,7 @@ form input[type="date"] {
 button[type="submit"] {
     background-color: #b4a251;
     color: white;
-    padding: 12px 20px;
+    padding: 14px 24px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
@@ -180,7 +180,7 @@ button#viewBalance {
     color: white;
     font-size: 16px;
     width: 100%;
-    padding: 12px 20px;
+    padding: 14px 24px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -194,7 +194,7 @@ button#viewBalance:hover {
 /* Welcome Message */
 .welcome-message {
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 20px;
     text-align: center;
     color: #333;
     font-weight: 600;
@@ -232,7 +232,7 @@ button#viewBalance:hover {
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     .container {
-        padding: 10px;
+        padding: 15px;
     }
 
     #loginContainer,
@@ -241,13 +241,13 @@ button#viewBalance:hover {
     }
 
     #leaveContainer h2 {
-        font-size: 24px;
+        font-size: 26px;
     }
 
     form label,
     form input,
     form select {
-        font-size: 14px;
+        font-size: 15px;
     }
 
     .images {
@@ -257,10 +257,41 @@ button#viewBalance:hover {
 
     .leave-image {
         width: 80%;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
     button {
-        font-size: 14px;
+        font-size: 15px;
     }
+}
+
+/* Hover Effects */
+button:hover {
+    background-color: #9e8837;
+    transform: translateY(-2px);
+}
+
+button[type="submit"]:hover {
+    background-color: #9e8837;
+    transform: translateY(-2px);
+}
+
+button#viewBalance:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+/* Focus Effects */
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #b4a251;
+    outline: none;
+    box-shadow: 0 0 4px rgba(180, 162, 81, 0.5);
+}
+
+textarea:focus {
+    border-color: #b4a251;
+    outline: none;
+    box-shadow: 0 0 4px rgba(180, 162, 81, 0.5);
 }
