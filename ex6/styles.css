@@ -1,7 +1,7 @@
 /* General Styles */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: #f4f7f6;
     margin: 0;
     padding: 0;
     color: #333;
@@ -18,16 +18,17 @@ h1 {
     color: #b4a251;
     font-size: 36px;
     margin-bottom: 20px;
-    font-weight: bold;
+    font-weight: 700;
 }
 
-/* Image styling */
+/* Image Styling */
 .leave-image {
     display: block;
     max-width: 100%;
     height: auto;
     margin: 20px auto;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Login Section */
@@ -37,14 +38,14 @@ h1 {
     align-items: center;
     margin-top: 40px;
     padding: 30px;
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 #loginForm {
     width: 100%;
-    max-width: 450px;
+    max-width: 420px;
 }
 
 #loginForm label {
@@ -63,11 +64,12 @@ h1 {
     border-radius: 5px;
     font-size: 16px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 #loginForm input[type="text"]:focus {
     border-color: #b4a251;
+    box-shadow: 0 0 5px rgba(180, 162, 81, 0.5);
     outline: none;
 }
 
@@ -80,11 +82,12 @@ button {
     font-size: 16px;
     cursor: pointer;
     width: 100%;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
     background-color: #9e8837;
+    transform: translateY(-2px);
 }
 
 button:focus {
@@ -96,16 +99,17 @@ button:focus {
     display: none;
     margin-top: 40px;
     padding: 30px;
-    background-color: #ffffff;
+    background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 #leaveContainer h2 {
     text-align: center;
-    font-size: 30px;
+    font-size: 32px;
     color: #b4a251;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    font-weight: 700;
 }
 
 #leaveBalances {
@@ -116,6 +120,7 @@ button:focus {
 
 .casual-leave, .medical-leave {
     font-weight: bold;
+    color: #555;
 }
 
 form label {
@@ -136,12 +141,13 @@ form textarea {
     border: 1px solid #ccc;
     font-size: 16px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 form input[type="date"]:focus,
 form select:focus {
     border-color: #b4a251;
+    box-shadow: 0 0 5px rgba(180, 162, 81, 0.5);
     outline: none;
 }
 
@@ -167,11 +173,12 @@ button[type="submit"] {
     cursor: pointer;
     border-radius: 5px;
     width: 100%;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button[type="submit"]:hover {
     background-color: #9e8837;
+    transform: translateY(-2px);
 }
 
 button#viewBalance {
@@ -184,11 +191,12 @@ button#viewBalance {
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button#viewBalance:hover {
     background-color: #45a049;
+    transform: translateY(-2px);
 }
 
 /* Welcome Message */
@@ -237,11 +245,11 @@ button#viewBalance:hover {
 
     #loginContainer,
     #leaveContainer {
-        padding: 20px;
+        padding: 25px;
     }
 
     #leaveContainer h2 {
-        font-size: 26px;
+        font-size: 28px;
     }
 
     form label,
@@ -262,6 +270,11 @@ button#viewBalance:hover {
 
     button {
         font-size: 15px;
+    }
+
+    button[type="submit"],
+    button#viewBalance {
+        padding: 14px 24px;
     }
 }
 
